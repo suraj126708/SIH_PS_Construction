@@ -17,10 +17,11 @@ app.use(express.json());
 
 
 import complaintRouter from "./routes/complaint.route.js"
+import { constructorRouter } from "./controllers/constructor.controller.js";
 
 
 app.use("/api",complaintRouter);
-
+app.use("/api",constructorRouter);
 
 
 
