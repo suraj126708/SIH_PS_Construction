@@ -1,19 +1,20 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { useParams } from "react-router-dom"; 
+import { useParams } from "react-router-dom";
 import "bootstrap/dist/css/bootstrap.min.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import userBg from "../Assests/images/user.png";
 import ComplaintsList from "../components/complaintList.jsx";
+import NavBar from "../components/Navbar.jsx";
 
 const ConstructorAccount = () => {
-  const { id } = useParams(); 
+  const { id } = useParams();
   const [constructorData, setConstructorData] = useState(null);
 
   useEffect(() => {
     const fetchConstructorData = async () => {
       try {
-        const response = await axios.get(`/api/constructorprofile/${id}`); 
+        const response = await axios.get(`/api/constructorprofile/${id}`);
         console.log(response);
         setConstructorData(response.data); // Set the whole response data
       } catch (error) {
@@ -33,8 +34,9 @@ const ConstructorAccount = () => {
 
   return (
     <>
-      <div className="bg-white w-full relative">
-        <section className="h-[95vh] flex flex-col justify-between my-[6.5rem]">
+      <NavBar id={"black"} />
+      <div className="bg-white relative">
+        <section className="h-[95vh] flex flex-col justify-between my-16">
           <div className="container mt-8 w-[100%] h-[45rem] bg-white rounded-lg p-5 shadow-lg">
             <div className="content flex justify-between items-center">
               <div className="left-side w-[35%] flex flex-col items-center relative">
@@ -68,10 +70,13 @@ const ConstructorAccount = () => {
                   {constructor.projects.map((project, index) => (
                     <tr
                       key={index}
-                      className={`border-b border-[#dddddd] ${index % 2 === 0 ? 'bg-[#f3f3f3]' : ''}`}
+                      className={`border-b border-[#dddddd] ${
+                        index % 2 === 0 ? "bg-[#f3f3f3]" : ""
+                      }`}
                     >
                       <td className="py-[30px]">{project.name}</td>
-                      <td className="py-[30px]">{project.startDate}</td> {/* Update accordingly */}
+                      <td className="py-[30px]">{project.startDate}</td>{" "}
+                      {/* Update accordingly */}
                       <td className="py-[30px]">{project.status}</td>
                       <td className="py-[30px]">
                         {complaints.length} {/* Update accordingly */}
@@ -83,7 +88,8 @@ const ConstructorAccount = () => {
             </div>
           </div>
         </section>
-        <ComplaintsList complaints={complaints || []} /> {/* Pass complaints here */}
+        <ComplaintsList complaints={complaints || []} />{" "}
+        {/* Pass complaints here */}
       </div>
     </>
   );

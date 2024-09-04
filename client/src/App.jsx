@@ -21,7 +21,7 @@ function App() {
           <Route path="/api/complaint" element={<Forum />} />
           <Route path="/MapComponent" element={<MapComponent />} />
           <Route path="/api/constructorform" element={<ConstructorForm />} />
-          <Route path="/api/Home" element={<HeroPage />} />
+          <Route path="/" element={<HeroPage />} />
 
           {/* Add other routes as needed */}
         </Routes>
