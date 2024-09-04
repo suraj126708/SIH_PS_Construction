@@ -69,9 +69,8 @@ const NavBar = () => {
           >
             <NavbarAnchor to={"/"} text={"home"} id={"home"} />
             <NavbarAnchor to={"/about"} text={"About"} />
-            <NavbarAnchor to={"/Trainers"} text={"trainers"} />
-            <NavbarAnchor to={"/Pricing"} text={"Pricing"} />
-            <NavbarAnchor to={"/contact"} text={"contact"} />
+            <NavbarAnchor to={"/Trainers"} text={"Heat Map"} />
+            <NavbarAnchor to={"/contact"} text={"Contact"} />
           </ul>
         </div>
       </div>

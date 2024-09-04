@@ -5,6 +5,8 @@ import Forum from "./pages/Forum.jsx";
 import ConstructorAccount from "./pages/ConstructionAcount.jsx";
 import MapComponent from "./components/HeapMap.jsx";
 import ConstructorForm from "./pages/Constructor.jsx";
+import HeroPage from "./pages/HeroPage.jsx";
+
 function App() {
   return (
     <div className="App">
@@ -19,6 +21,7 @@ function App() {
           <Route path="/api/complaint" element={<Forum />} />
           <Route path="/MapComponent" element={<MapComponent />} />
           <Route path="/api/constructorform" element={<ConstructorForm />} />
+          <Route path="/api/Home" element={<HeroPage />} />
 
           {/* Add other routes as needed */}
         </Routes>
