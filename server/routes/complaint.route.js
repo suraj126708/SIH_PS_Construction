@@ -3,7 +3,7 @@ import {complaintByUser} from "../controllers/complaint.controller.js";
 
 const router=Router();
 
-router.route("/complaint").post(complaintByUser);
+router.route("/").post(complaintByUser);
 
 
 

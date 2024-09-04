@@ -1,9 +1,9 @@
 import {Router} from "express";
-import {complaintByUser} from "../controllers/complaint.controller.js";
+import {constructorRouter} from "../controllers/constructor.controller.js";
 
 const router=Router();
 
-router.route("/constructor").post(complaintByUser);
+router.route("/").post(constructorRouter);
 
 
 
