@@ -59,7 +59,7 @@ function Forum() {
   };
 
   return (
-    <div className="max-w-2xl mx-auto p-6 bg-white shadow-lg rounded-lg">
+    <div className="mx-auto p-6 bg-white shadow-lg rounded-lg my-4 w-[60rem]">
       <h2 className="text-2xl font-semibold mb-4">Submit a Complaint</h2>
       <form onSubmit={handleSubmit} className="space-y-4">
         <div>
