@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import MapboxComponent from "../components/MapLocationSelection";
 import axios from "axios";
+import NavBar from "../components/Navbar";
 
 function Forum() {
   const [image, setImage] = useState(null);
@@ -130,3 +131,5 @@ function Forum() {
 }
 
 export default Forum;
+
+
