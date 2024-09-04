@@ -18,7 +18,9 @@ const HeapMap = () => {
   const [popupCoordinates, setPopupCoordinates] = useState(null);
 
   useEffect(() => {
-    if (map.current) return; // Initialize map only once
+    if (map.current) return;
+
+    // Initialize map
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -26,8 +28,9 @@ const HeapMap = () => {
       zoom: 14,
     });
 
+    // Load map layers
     map.current.on("load", () => {
-      // Add a source for the rectangle
+      // Add bounding box source and layer
       map.current.addSource("boundingBox", {
         type: "geojson",
         data: {
@@ -47,7 +50,7 @@ const HeapMap = () => {
         },
       });
 
-      // Add a layer to highlight the rectangle
+      // Add bounding box border layer
       map.current.addLayer({
         id: "boundingBoxLayer",
         type: "line",
@@ -59,7 +62,7 @@ const HeapMap = () => {
         },
       });
 
-      // Add a layer to highlight roads within the bounding box
+      // Highlight roads within the bounding box
       map.current.addLayer({
         id: "highlighted-roads",
         type: "line",
@@ -89,14 +92,15 @@ const HeapMap = () => {
         },
       });
 
-      // Add a click event listener to the map
+      // Add click event listener after layers are loaded
       map.current.on("click", (e) => {
         const features = map.current.queryRenderedFeatures(e.point, {
           layers: ["boundingBoxLayer"],
         });
 
         if (features.length > 0) {
-          setPopupCoordinates(e.point);
+          const coordinates = e.lngLat;
+          setPopupCoordinates(coordinates);
           setShowPopup(true);
         }
       });
@@ -111,6 +115,7 @@ const HeapMap = () => {
           style={{
             left: `${popupCoordinates.x}px`,
             top: `${popupCoordinates.y}px`,
+            zIndex: 1000,
           }}
         >
           <h3 className="text-lg font-semibold mb-2">5th stage:</h3>
