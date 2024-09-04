@@ -19,7 +19,6 @@ const HeapMap = () => {
 
   useEffect(() => {
     if (map.current) return; // Initialize map only once
-
     map.current = new mapboxgl.Map({
       container: mapContainer.current,
       style: "mapbox://styles/mapbox/streets-v11",
@@ -60,23 +59,48 @@ const HeapMap = () => {
         },
       });
 
-      // Add a click event listener to the rectangle
-      map.current.on("click", "boundingBoxLayer", (e) => {
-        const { lngLat, point } = e;
-        console.log("LngLat:", lngLat); // Log the lat/lng coordinates
-        console.log("Point:", point); // Log the x, y screen coordinates
+      // Add a layer to highlight roads within the bounding box
+      map.current.addLayer({
+        id: "highlighted-roads",
+        type: "line",
+        source: "composite",
+        "source-layer": "road",
+        filter: [
+          "all",
+          [
+            "within",
+            {
+              type: "Polygon",
+              coordinates: [
+                [
+                  [minLng, minLat],
+                  [maxLng, minLat],
+                  [maxLng, maxLat],
+                  [minLng, maxLat],
+                  [minLng, minLat],
+                ],
+              ],
+            },
+          ],
+        ],
+        paint: {
+          "line-color": "#000000",
+          "line-width": 3,
+        },
+      });
 
-        setPopupCoordinates({ x: point.x, y: point.y });
-        setShowPopup(true);
+      // Add a click event listener to the map
+      map.current.on("click", (e) => {
+        const features = map.current.queryRenderedFeatures(e.point, {
+          layers: ["boundingBoxLayer"],
+        });
+
+        if (features.length > 0) {
+          setPopupCoordinates(e.point);
+          setShowPopup(true);
+        }
       });
     });
-
-    // Cleanup on unmount
-    return () => {
-      if (map.current) {
-        map.current.remove();
-      }
-    };
   }, [minLng, minLat, maxLng, maxLat]);
 
   return (
