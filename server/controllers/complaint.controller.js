@@ -4,10 +4,9 @@ import { Complaint } from "../models/complaint.model.js";
 const complaintByUser=async(req,res)=>{
 
     try{
-        const {latitude,longitude,photo,complaint}=req.body;
-
+        const {location,image,complaint}=req.body;
         const Complaintsave= await Complaint.create({
-            latitude,longitude,photo,complaint
+            location,image,complaint
         });
 
         return res.status(201)

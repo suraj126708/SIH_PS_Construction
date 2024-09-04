@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import MapboxComponent from "../components/MapLocationSelection";
+import axios from "axios";
 
 function Forum() {
   const [image, setImage] = useState(null);
-  const [location, setLocation] = useState("");
+  const [location, setLocation] = useState({ lat: "", lng: "" });
   const [showMap, setShowMap] = useState(false);
   const [complaint, setComplaint] = useState("");
 
@@ -17,7 +18,7 @@ function Forum() {
         (position) => {
           const lat = position.coords.latitude;
           const lng = position.coords.longitude;
-          setLocation(`Lat: ${lat}, Lng: ${lng}`);
+          setLocation({ lat: lat, lng: lng });
         },
         (error) => {
           console.error(error);
@@ -34,19 +35,26 @@ function Forum() {
   };
 
   const handleLocationSelect = (lat, lng) => {
-    setLocation(`Lat: ${lat}, Lng: ${lng}`);
+    setLocation({ lat: lat, lng: lng });
     setShowMap(false); // Hide the map after selection
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     const formData = {
       image,
       location,
       complaint,
     };
-    console.log("Form Data:", formData);
-    alert("Form submitted successfully!");
+    try {
+      const response = await axios.post(`/api/complaint`, formData);
+      console.log(formData);
+      if (response.status === 201) {
+        alert("Complaint submitted successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+    }
   };
 
   return (
@@ -87,8 +95,10 @@ function Forum() {
               Select from Map
             </button>
           </div>
-          {location && (
-            <p className="mt-2 text-sm text-gray-600">Location: {location}</p>
+          {location.lat && location.lng && (
+            <p className="mt-2 text-sm text-gray-600">
+              Location: Lat: {location.lat}, Lng: {location.lng}
+            </p>
           )}
         </div>
 

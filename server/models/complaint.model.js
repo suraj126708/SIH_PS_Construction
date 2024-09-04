@@ -1,13 +1,10 @@
 import mongoose,{Schema} from 'mongoose';
 
 const complaintSchema = new Schema({
-    latitude:{
-        type:Number,
+    location:{
+        type:Object,
     },
-    longitude:{
-        type:Number,
-    },
-    photo:{
+    image:{
         type:String,
     },
     complaint:{
