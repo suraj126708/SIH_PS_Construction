@@ -7,9 +7,9 @@ mapboxgl.accessToken =
 
 const MapboxMap = ({ onLocationSelect }) => {
   const mapContainerRef = useRef(null);
-  const [lng, setLng] = useState(0);
-  const [lat, setLat] = useState(0);
-  const zoom = 2;
+  const [lng, setLng] = useState(73.8646);
+  const [lat, setLat] = useState(18.4535);
+  const zoom = 15;
   const markerRef = useRef(null);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ const MapboxMap = ({ onLocationSelect }) => {
   };
 
   return (
-    <div>
+    <div style={{ width: "100%", height: "500px" }}>
       <div
         className="map-container"
         ref={mapContainerRef}

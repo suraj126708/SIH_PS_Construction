@@ -22,13 +22,13 @@ const ComplaintsList = ({ complaints }) => {
                 className="w-32 h-32 object-cover rounded-lg"
               />
               <div className="flex flex-col justify-center">
-                <h3 className="text-xl text-uppercase font-semibold">
+                <h3 className="text-xl text-uppercase text-left font-semibold">
                   Complaint ID: {complaint._id}
                 </h3>
-                <p className="text-gray-700 text-lg mt-2">
+                <p className="text-gray-700 text-left text-lg mt-2">
                   Location: {complaint.location ? `${complaint.location.lat}, ${complaint.location.lng}` : 'N/A'}
                 </p>
-                <p className="text-gray-700 text-lg mt-2">
+                <p className="text-gray-700 text-left text-lg mt-2">
                   Description: {complaint.complaint}
                 </p>
               </div>
