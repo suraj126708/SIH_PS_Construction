@@ -38,7 +38,7 @@ const ConstructorForm = () => {
     e.preventDefault();
 
     try {
-      const response = await axios.post('http://localhost:5000/api/constructors', {
+      const response = await axios.post('/api/constructors', {
         name,
         email,
         password,
