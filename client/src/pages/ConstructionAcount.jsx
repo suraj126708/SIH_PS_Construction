@@ -6,6 +6,7 @@ import "@fortawesome/fontawesome-free/css/all.min.css";
 import userBg from "../Assests/images/user.png";
 import ComplaintsList from "../components/complaintList.jsx";
 import NavBar from "../components/Navbar.jsx";
+// import userBg from "../Assests/images/test_img.png";
 
 const ConstructorAccount = () => {
   const { id } = useParams();
@@ -36,7 +37,7 @@ const ConstructorAccount = () => {
     <>
       <NavBar id={"black"} />
       <div className="bg-white relative">
-        <section className="h-[95vh] flex flex-col justify-between my-16">
+        <section className="h-[95vh] flex flex-col justify-between my-24">
           <div className="container mt-8 w-[100%] h-[45rem] bg-white rounded-lg p-5 shadow-lg">
             <div className="content flex justify-between items-center">
               <div className="left-side w-[35%] flex flex-col items-center relative">
@@ -74,12 +75,16 @@ const ConstructorAccount = () => {
                       }`}
                     >
                       <td className="py-[30px]">{project.name}</td>
-                      <td className="py-[30px]">{new Date(project.startDate).toISOString().split('T')[0]}</td> {/* Update accordingly */}
+                      <td className="py-[30px]">
+                        {
+                          new Date(project.startDate)
+                            .toISOString()
+                            .split("T")[0]
+                        }
+                      </td>{" "}
+                      {/* Update accordingly */}
                       <td className="py-[30px]">{project.status}</td>
                       <td className="py-[30px]">{complaints.length}</td>
-                      <td className="py-[30px]">
-                        <input type="image" alt="image" />
-                      </td>
                     </tr>
                   ))}
                 </tbody>

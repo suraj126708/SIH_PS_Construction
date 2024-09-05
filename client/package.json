@@ -7,11 +7,8 @@
     "@babel/core": "^7.25.2",
     "@fortawesome/fontawesome-free": "^6.6.0",
     "@mapbox/mapbox-gl-draw": "^1.4.3",
-<<<<<<< HEAD
-=======
     "@pmmmwh/react-refresh-webpack-plugin": "^0.5.15",
     "@svgr/webpack": "^5.5.0",
->>>>>>> 388ad9ab875bf4738f998f0b6eb7ca0f84a38f52
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
