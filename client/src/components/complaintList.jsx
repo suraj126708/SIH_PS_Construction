@@ -1,8 +1,9 @@
 import React from "react";
-import bg from "../Assests/images/user.png";
+// import bg from "../Assests/images/user.png";
 
 const ComplaintsList = ({ complaints }) => {
-  console.log(complaints);
+console.log("complaints show here");
+
   
   return (
     <div className="bg-white w-full h-screen pb-6">
@@ -16,11 +17,11 @@ const ComplaintsList = ({ complaints }) => {
               key={index}
               className="m-4 border rounded-lg shadow-lg p-4 flex items-center space-x-4 h-full"
             >
-              <img
+              {/* <img
                 src={complaint.image || "/path/to/default-image.png"} // Use complaint image or a default image
                 alt={`Complaint ${complaint._id}`}
                 className="w-32 h-32 object-cover rounded-lg"
-              />
+              /> */}
               <div className="flex flex-col justify-center">
                 <h3 className="text-xl text-uppercase text-left font-semibold">
                   Complaint ID: {complaint._id}

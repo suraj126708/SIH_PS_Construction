@@ -15,7 +15,6 @@ const ConstructorAccount = () => {
     const fetchConstructorData = async () => {
       try {
         const response = await axios.get(`/api/constructorprofile/${id}`);
-        console.log(response);
         setConstructorData(response.data); // Set the whole response data
       } catch (error) {
         console.error("Error fetching constructor data", error);
@@ -75,7 +74,11 @@ const ConstructorAccount = () => {
                       }`}
                     >
                       <td className="py-[30px]">{project.name}</td>
-                      <td className="py-[30px]">{new Date(project.startDate).toISOString().split('T')[0]}</td> {/* Update accordingly */}
+                      <td className="py-[30px]">
+  {project.startDate && !isNaN(new Date(project.startDate).getTime())
+    ? project.startDate.split('T')[0] // Extracts 'YYYY-MM-DD' from the ISO string
+    : 'Invalid Date'}
+</td>
                       <td className="py-[30px]">{project.status}</td>
                       <td className="py-[30px]">
                         {complaints.length} {/* Update accordingly */}
