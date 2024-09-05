@@ -1,7 +1,9 @@
 import React from "react";
+import bg from "../Assests/images/user.png";
 
 const ComplaintsList = ({ complaints }) => {
-  console.log(complaints.location);
+  console.log(complaints);
+  
   return (
     <div className="bg-white w-full h-screen pb-6">
       <h2 className="text-4xl font-bold mb-6 text-uppercase py-4">
@@ -30,20 +32,16 @@ const ComplaintsList = ({ complaints }) => {
                   Description: {complaint.complaint}
                 </p>
               </div>
-            </div>
+            </div> // Close the inner div here
           ))
         ) : (
-          <p className="text-lg text-center text-gray-700 mt-4">No complaints available.</p>
+          <p className="text-lg text-center text-gray-700 mt-4">
+            No complaints available.
+          </p>
         )}
-      </div>
+      </div> {/* Close the grid div */}
     </div>
   );
 };
 
 export default ComplaintsList;
-
-
-// 18.398347192612576, 74.00223141779414
-// 18.410614233941434, 73.81477096878608
-// 18.55385069690164, 73.97696245444821
-// 18.549950901919924, 73.79244025699204

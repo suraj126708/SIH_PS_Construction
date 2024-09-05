@@ -40,3 +40,10 @@
     transform: rotate(360deg);
   }
 }
+
+#hero-page {
+  background-color: #61dafb;
+  background-image: url("./Assests/images/hero-page-sih.jpg");
+  background-size: cover;
+  background-position: center;
+}

@@ -1,4 +1,7 @@
+<<<<<<< HEAD
 
+=======
+>>>>>>> 388ad9ab875bf4738f998f0b6eb7ca0f84a38f52
 import React, { useEffect, useRef, useState } from "react";
 import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
@@ -102,7 +105,7 @@ const MapComponent = () => {
 
       roadTypes.forEach((roadType) => {
         mapInstance.addLayer({
-          id: `highlighted-roads-${roadType}`,
+          id: ` highlighted-roads-${roadType}`,
           type: "line",
           source: "composite",
           "source-layer": "road",

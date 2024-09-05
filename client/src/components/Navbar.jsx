@@ -1,16 +1,27 @@
 import Bgimg from "../Assests/images/VITamin c++.svg";
 import { useState } from "react";
 import NavbarAnchor from "./NavbarAnchor";
+import { useNavigate } from "react-router-dom";
 
-const NavBar = () => {
+const NavBar = ({ id }) => {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleMenu = () => {
     setIsOpen(!isOpen);
   };
 
+  const navigate = useNavigate();
+
+  const handleUserProfileclick = () => {
+    navigate("/api/constructorprofile/:id");
+  };
+
   return (
-    <nav className="absolute top-0 w-[100%]">
+    <nav
+      className={`absolute top-0 w-[100%] ${
+        id === "black" ? "text-black" : "text-white"
+      }`}
+    >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
         <a href="/" className="flex items-center space-x-3">
           <img src={Bgimg} className="h-8 z-40" alt="Fit4You Logo" id="logo" />
@@ -29,6 +40,7 @@ const NavBar = () => {
               className="w-8 h-8 rounded-full"
               src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
               alt="user"
+              onClick={handleUserProfileclick}
             />
           </button>
           <button
@@ -67,11 +79,14 @@ const NavBar = () => {
             id="navText"
             className="flex flex-col font-medium p-4 md:p-0 mt-0 md:space-x-8 z-40 rtl:space-x-reverse md:flex-row md:mt-0 md:border-0 z-40"
           >
-            <NavbarAnchor to={"/"} text={"home"} id={"home"} />
-            <NavbarAnchor to={"/about"} text={"About"} />
-            <NavbarAnchor to={"/Trainers"} text={"trainers"} />
-            <NavbarAnchor to={"/Pricing"} text={"Pricing"} />
-            <NavbarAnchor to={"/contact"} text={"contact"} />
+            <NavbarAnchor to={"/"} text={"Home"} id={"home"} className={id} />
+            <NavbarAnchor to={"/about"} text={"About"} className={id} />
+            <NavbarAnchor
+              to={"/MapComponent"}
+              text={"Heat Map"}
+              className={id}
+            />
+            <NavbarAnchor to={"/contact"} text={"Contact"} className={id} />
           </ul>
         </div>
       </div>
