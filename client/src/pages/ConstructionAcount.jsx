@@ -71,7 +71,7 @@ const ConstructorAccount = () => {
                       className={`border-b border-[#dddddd] ${index % 2 === 0 ? 'bg-[#f3f3f3]' : ''}`}
                     >
                       <td className="py-[30px]">{project.name}</td>
-                      <td className="py-[30px]">{project.startDate}</td> {/* Update accordingly */}
+                      <td className="py-[30px]">{new Date(project.startDate).toISOString().split('T')[0]}</td> {/* Update accordingly */}
                       <td className="py-[30px]">{project.status}</td>
                       <td className="py-[30px]">
                         {complaints.length} {/* Update accordingly */}

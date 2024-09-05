@@ -6,9 +6,11 @@ const checkComplaintLocation = async (complaintId) => {
     // Fetch the complaint
     const complaint = await Complaint.findById(complaintId);
     if (!complaint) throw new Error('Complaint not found');
+    console.log(complaint);
 
     // Extract latitude and longitude from the nested location field
     const { lat: latitude, lng: longitude } = complaint.location;
+    const { image } = complaint; // Assuming image field exists in the complaint model
     console.log(`latitude: ${latitude} longitude: ${longitude}`);
 
     // Fetch all constructors and their projects
@@ -28,10 +30,10 @@ const checkComplaintLocation = async (complaintId) => {
           longitude >= Math.min(longitude1, longitude2) &&
           longitude <= Math.max(longitude1, longitude2)
         ) {
-          // Add the complaint to the constructor's profile
+          // Add the complaint ID and image to the constructor's profile
           await Constructor.findByIdAndUpdate(
             constructor._id,
-            { $push: { complaints: complaintId } } // Add complaint ID to constructor profile
+            { $push: { complaints: { complaintId, image } } } // Add both complaint ID and image
           );
           matched = true;
           break;
@@ -39,8 +41,8 @@ const checkComplaintLocation = async (complaintId) => {
       }
       if (matched) {
         console.log("constructor matched");
-        break ;
-      } // Exit outer loop if a match is found
+        break; // Exit outer loop if a match is found
+      }
     }
 
     if (!matched) {

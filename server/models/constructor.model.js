@@ -34,6 +34,10 @@ const ProjectSchema = new mongoose.Schema({
   boundaries: {
     type: ProjectBoundarySchema,
     required: true
+  },
+  startDate: {
+    type: Date,
+    required: true
   }
 });
 
