@@ -3,6 +3,7 @@ import mapboxgl from "mapbox-gl";
 import MapboxDraw from "@mapbox/mapbox-gl-draw";
 import "mapbox-gl/dist/mapbox-gl.css";
 import "@mapbox/mapbox-gl-draw/dist/mapbox-gl-draw.css";
+import mapimg from "../Assests/images/image.png";
 
 const MapComponent = () => {
   const mapContainerRef = useRef(null);
@@ -138,7 +139,7 @@ const MapComponent = () => {
         const popupContent = `
           <div style="font-family: Arial, sans-serif; width: 200px; padding: 10px;">
             <h3 style="margin: 0;">5th stage: <br> Asphalt layering</h3>
-            <img src="img.jpg" alt="Asphalt layering" style="width: 100%; height: auto; margin: 10px 0;">
+            <img src=${mapimg} alt="Asphalt layering" style="width: 100%; height: auto; margin: 10px 0;">
             <p style="font-size: 12px; color: gray; text-align: right;">5 Oct '24</p>
             <p style="margin: 5px 0;">Start date: 4 Sept '24</p>
             <p style="margin: 5px 0;">Days passed since start: <i>30 days</i></p>

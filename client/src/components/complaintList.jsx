@@ -27,13 +27,13 @@ const ComplaintsList = ({ complaints }) => {
                   <h3 className="text-xl text-uppercase text-left font-semibold">
                     Complaint ID: {complaint._id}
                   </h3>
-                  <p className="text-gray-700 text-left text-lg mt-2">
+                  <p className="text-gray-700 text-left text-lg mt-4">
                     Location:{" "}
                     {complaint.location
                       ? `${complaint.location.lat}, ${complaint.location.lng}`
                       : "N/A"}
                   </p>
-                  <p className="text-gray-700 text-left text-lg mt-2">
+                  <p className="text-gray-700 text-left text-lg mt-4">
                     Description: {complaint.complaint}
                   </p>
                 </div>

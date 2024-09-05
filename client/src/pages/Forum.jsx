@@ -8,9 +8,10 @@ function Forum() {
   const [location, setLocation] = useState({ lat: "", lng: "" });
   const [showMap, setShowMap] = useState(false);
   const [complaint, setComplaint] = useState("");
+  const [loading, setLoading] = useState(false); // For loading state
 
   const handleImageChange = (e) => {
-    setImage(URL.createObjectURL(e.target.files[0]));
+    setImage(e.target.files[0]); // Store the file, not the URL
   };
 
   const handleLiveLocation = () => {
@@ -42,19 +43,25 @@ function Forum() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const formData = {
-      image,
-      location,
-      complaint,
-    };
+    setLoading(true); // Set loading to true when submission starts
+    const formData = new FormData();
+    formData.append("image", image); // Append the file itself
+    formData.append("location", JSON.stringify(location)); // Stringify location data
+    formData.append("complaint", complaint);
+
     try {
-      const response = await axios.post(`/api/complaint`, formData);
-      console.log(formData);
+      const response = await axios.post(`/api/complaint`, formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
       if (response.status === 201) {
         alert("Complaint submitted successfully!");
       }
     } catch (error) {
       console.log(error);
+    } finally {
+      setLoading(false); // Set loading to false once submission is complete
     }
   };
 
@@ -68,12 +75,13 @@ function Forum() {
             <label className="block text-gray-700 mb-2">Upload Photo</label>
             <input
               type="file"
+              name="image"
               onChange={handleImageChange}
               className="block w-full text-sm text-gray-500 file:mr-4 file:py-2 file:px-4 file:border-0 file:text-sm file:font-semibold file:bg-blue-50 file:text-blue-700 hover:file:bg-blue-100"
             />
             {image && (
               <img
-                src={image}
+                src={URL.createObjectURL(image)} // For preview
                 alt="Preview"
                 className="mt-4 w-32 h-32 object-cover"
               />
@@ -99,14 +107,14 @@ function Forum() {
               </button>
             </div>
             {location.lat && location.lng && (
-              <p className="mt-2 text-sm text-gray-600">
+              <p className="my-4 text-sm text-gray-600">
                 Location: Lat: {location.lat}, Lng: {location.lng}
               </p>
             )}
           </div>
 
           {showMap && (
-            <div className="mt-4">
+            <div className="my-2">
               <MapboxComponent onLocationSelect={handleLocationSelect} />
             </div>
           )}
@@ -116,16 +124,20 @@ function Forum() {
             <textarea
               value={complaint}
               onChange={(e) => setComplaint(e.target.value)}
-              className="w-full h-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400"
+              className="w-full h-32 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-400 resize-vertical"
               placeholder="Write your complaint here..."
+              aria-label="Complaint"
+              minLength={10} // example validation
+              maxLength={500} // example validation
             ></textarea>
           </div>
 
           <button
             type="submit"
             className="w-full py-2 bg-green-500 text-white font-semibold rounded-md hover:bg-green-600"
+            disabled={loading} // Disable button when loading
           >
-            Submit
+            {loading ? "Submitting..." : "Submit"}
           </button>
         </form>
       </div>
