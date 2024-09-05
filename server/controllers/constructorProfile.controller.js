@@ -16,6 +16,7 @@ export const constructorProfile = async (req, res) => {
       constructor,
       complaints: constructor.complaints
     });
+    console.log(constructor.complaints);
   } catch (error) {
     res.status(500).json({ message: 'Server Error', error });
   }

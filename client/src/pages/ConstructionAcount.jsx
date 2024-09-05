@@ -74,7 +74,7 @@ const ConstructorAccount = () => {
                       }`}
                     >
                       <td className="py-[30px]">{project.name}</td>
-                      <td className="py-[30px]">{project.startDate}</td>{" "}
+                      <td className="py-[30px]">{new Date(project.startDate).toISOString().split('T')[0]}</td> {/* Update accordingly */}
                       <td className="py-[30px]">{project.status}</td>
                       <td className="py-[30px]">{complaints.length}</td>
                       <td className="py-[30px]">
