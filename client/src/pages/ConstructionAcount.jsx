@@ -52,7 +52,6 @@ const ConstructorAccount = () => {
                   <p className="topic py-2 font-medium text-left">
                     Email ID: {constructor.email}
                   </p>
-                  {/* Add other details as needed */}
                 </div>
               </div>
 
@@ -80,8 +79,9 @@ const ConstructorAccount = () => {
     : 'Invalid Date'}
 </td>
                       <td className="py-[30px]">{project.status}</td>
+                      <td className="py-[30px]">{complaints.length}</td>
                       <td className="py-[30px]">
-                        {complaints.length} {/* Update accordingly */}
+                        <input type="image" alt="image" />
                       </td>
                     </tr>
                   ))}

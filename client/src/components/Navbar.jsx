@@ -24,7 +24,7 @@ const NavBar = ({ id }) => {
     >
       <div className="max-w-screen-xl flex flex-wrap items-center justify-between mx-auto ">
         <a href="/" className="flex items-center space-x-3">
-          <img src={Bgimg} className="h-8 z-40" alt="Fit4You Logo" id="logo" />
+          <img src={Bgimg} className="h-28 z-40" alt="Fit4You Logo" id="logo" />
         </a>
         <div className="flex items-center md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse">
           <button
@@ -37,7 +37,7 @@ const NavBar = ({ id }) => {
           >
             <span className="sr-only">Open user menu</span>
             <img
-              className="w-8 h-8 rounded-full"
+              className="w-12 rounded-full"
               src="https://flowbite.com/docs/images/people/profile-picture-3.jpg"
               alt="user"
               onClick={handleUserProfileclick}

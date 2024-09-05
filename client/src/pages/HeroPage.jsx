@@ -1,5 +1,8 @@
 import NavBar from "../components/Navbar";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
+import axios from "axios";
+import roadimg from "../Assests/images/test_img.jpg";
 
 export default function HeroPage() {
   const navigate = useNavigate();
@@ -7,6 +10,17 @@ export default function HeroPage() {
   const handleRegisterComplaint = () => {
     navigate("/api/complaint");
   };
+
+  useEffect(() => {
+    axios
+      .get(`http://localhost:5000/${roadimg}`)
+      .then((response) => {
+        console.log(response.data);
+      })
+      .catch((error) => {
+        console.error("Error fetching data", error);
+      });
+  }, []);
 
   return (
     <>
