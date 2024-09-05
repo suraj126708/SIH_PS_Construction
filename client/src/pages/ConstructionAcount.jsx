@@ -16,7 +16,6 @@ const ConstructorAccount = () => {
     const fetchConstructorData = async () => {
       try {
         const response = await axios.get(`/api/constructorprofile/${id}`);
-        console.log(response);
         setConstructorData(response.data); // Set the whole response data
       } catch (error) {
         console.error("Error fetching constructor data", error);

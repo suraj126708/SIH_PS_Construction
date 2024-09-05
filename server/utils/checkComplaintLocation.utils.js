@@ -6,20 +6,22 @@ const checkComplaintLocation = async (complaintId) => {
     // Fetch the complaint
     const complaint = await Complaint.findById(complaintId);
     if (!complaint) throw new Error('Complaint not found');
-    console.log(complaint);
+    console.log("This is a complaint");
 
     // Extract latitude and longitude from the nested location field
     const { lat: latitude, lng: longitude } = complaint.location;
     const { image } = complaint; // Assuming image field exists in the complaint model
-    console.log(`latitude: ${latitude} longitude: ${longitude}`);
+    console.log(`Latitude: ${latitude} Longitude: ${longitude}`);
 
     // Fetch all constructors and their projects
     const constructors = await Constructor.find();
 
-    let matched = false;
+    let matchedConstructors = [];
 
     // Check each constructor's projects
     for (const constructor of constructors) {
+      let hasMatchedProject = false;
+
       for (const project of constructor.projects) {
         const { latitude1, longitude1, latitude2, longitude2 } = project.boundaries;
 
@@ -30,23 +32,25 @@ const checkComplaintLocation = async (complaintId) => {
           longitude >= Math.min(longitude1, longitude2) &&
           longitude <= Math.max(longitude1, longitude2)
         ) {
-          // Add the complaint ID and image to the constructor's profile
+          // Add the complaint ID to the constructor's profile
           await Constructor.findByIdAndUpdate(
             constructor._id,
-            { $push: { complaints: { complaintId, image } } } // Add both complaint ID and image
+            { $push: { complaints: complaintId } } // Add only complaint ID
           );
-          matched = true;
-          break;
+          hasMatchedProject = true;
         }
       }
-      if (matched) {
-        console.log("constructor matched");
-        break; // Exit outer loop if a match is found
+
+      if (hasMatchedProject) {
+        matchedConstructors.push(constructor._id);
+        console.log(`Constructor with ID ${constructor._id} matched`);
       }
     }
 
-    if (!matched) {
+    if (matchedConstructors.length === 0) {
       console.log('No constructor project matched the complaint coordinates');
+    } else {
+      console.log(`Matched constructors: ${matchedConstructors}`);
     }
 
   } catch (error) {
